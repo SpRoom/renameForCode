@@ -28,6 +28,8 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var startButton: NSButton!
 
     @IBOutlet weak var projectPathField: NSTextField!
 
@@ -39,9 +41,9 @@ class ViewController: NSViewController {
 
 
     @IBAction func startChange(_ sender: Any) {
-/*
-        let manager = FileController.shared
 
+        let manager = FileController.shared
+/*
         let desktop = "/Users/zyt/Desktop/"
 
         let dirPath = desktop+"123/412/test/"
@@ -59,6 +61,10 @@ class ViewController: NSViewController {
 //        manager.changeFileName(dir: dirPath, fileName: fileName, newName: fileName1)
 //        manager.replaceTextFile(dir: dirPath, file: fileName1, oldValue: "replace", newValue: "")
 */
+
+        startButton.isEnabled = false
+        self.showErrorStatus("正在进行中...")
+
         let projectPathStr = projectPathField.stringValue
         let prefixStr = modifyPrefixField.stringValue
         let pathExtensionsStr = extensionArrayField.stringValue
@@ -81,7 +87,17 @@ class ViewController: NSViewController {
             return
         }
 
-        start(projectPathStr: projectPathStr, prefixStr: prefixStr, newPrefixStr: newPrefixStr, pathExtensionsStr: pathExtensionsStr)
+        manager.resultNoti = {result in
+            if result {
+                self.showSuccessStatus("更新完成")
+            } else {
+                self.showErrorStatus("更新失败")
+            }
+        }
+
+        manager.start(projectPathStr: projectPathStr, prefixStr: prefixStr, newPrefixStr: newPrefixStr, pathExtensionsStr: pathExtensionsStr)
+
+
 
 
     }
@@ -90,67 +106,31 @@ class ViewController: NSViewController {
 
 extension ViewController {
 
-    func start(projectPathStr: String, prefixStr: String, newPrefixStr: String, pathExtensionsStr: String) {
-
-        let pathExtensions = pathExtensionsStr.components(separatedBy: ",")
-        let dirPath = Path(projectPathStr)^
-
-       let paths = dirPath.find { (path) -> Bool in
-            pathExtensions.contains(path.pathExtension)
-        }
-
-        for path in paths {
-            print(path)
-           let str = path.fileName.replacingOccurrences(of: prefixStr, with: newPrefixStr)
-            print(str)
-
-        }
-
-        let infos = paths.map { (path)  -> FileInfo in
-            let newName = path.replaceFileNamePrefix(of: prefixStr, with: newPrefixStr, containExtension: false)
-            let newFileName = path.replaceFileNamePrefix(of: prefixStr, with: newPrefixStr, containExtension: true)
-            return FileInfo(name: path.name, dir: path^.rawValue, fileName: path.fileName, pathExtension: path.pathExtension, path: path, newName: newName, newFileName: newFileName)
-        }
-
-        let manager = FileController.shared
-
-
-        for path in paths {
-            for info in infos {
-                manager.replaceTextFile(dir: path^.rawValue, file: path.fileName, oldValue: info.name, newValue: info.newName)
-            }
-        }
-
-        for info in infos {
-
-            manager.changeTextFileName(dir: info.dir, fileName: info.fileName, newName: info.newFileName)
-        }
-
-        fixXocdeConfig(infos: infos, rootDir: dirPath)
-    }
-
-
-    func fixXocdeConfig(infos: [FileInfo], rootDir: Path) {
-
-        let configPaths = rootDir.find { (path) -> Bool in
-            path.pathExtension == "pbxproj" && path.name == "project"
-        }
-
-        guard !configPaths.isEmpty else {
-            return
-        }
-        let configPath = configPaths[0]
-        print(configPath)
-
-
-        for info in infos {
-
-            FileController.shared.replaceTextFile(dir: configPath^.rawValue, file: configPath.fileName, oldValue: info.name, newValue: info.newName)
-
-        }
-
-    }
     
+    
+}
+
+extension ViewController {
+
+    /**
+     Shows the passed error status message
+     */
+    func showErrorStatus(_ errorMessage: String)
+    {
+
+        statusLabel.textColor = NSColor.red
+        statusLabel.stringValue = errorMessage
+    }
+
+    /**
+     Shows the passed success status message
+     */
+    func showSuccessStatus(_ successMessage: String)
+    {
+
+        statusLabel.textColor = NSColor.green
+        statusLabel.stringValue = successMessage
+    }
 }
 
 

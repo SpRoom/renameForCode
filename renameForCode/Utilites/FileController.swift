@@ -17,11 +17,77 @@ final class FileController {
 
     let manager = FileManager.default
 
+
+    typealias callBack = (Bool)->()
+
+    var resultNoti: callBack?
 }
 
 // public static function
 extension FileController {
 
+    func start(projectPathStr: String, prefixStr: String, newPrefixStr: String, pathExtensionsStr: String) {
+
+        let pathExtensions = pathExtensionsStr.components(separatedBy: ",")
+        let dirPath = Path(projectPathStr)^
+
+        let paths = dirPath.find { (path) -> Bool in
+            pathExtensions.contains(path.pathExtension)
+        }
+
+        for path in paths {
+            print(path)
+            let str = path.fileName.replacingOccurrences(of: prefixStr, with: newPrefixStr)
+            print(str)
+
+        }
+
+        let infos = paths.map { (path)  -> FileInfo in
+            let newName = path.replaceFileNamePrefix(of: prefixStr, with: newPrefixStr, containExtension: false)
+            let newFileName = path.replaceFileNamePrefix(of: prefixStr, with: newPrefixStr, containExtension: true)
+            return FileInfo(name: path.name, dir: path^.rawValue, fileName: path.fileName, pathExtension: path.pathExtension, path: path, newName: newName, newFileName: newFileName)
+        }
+
+        let manager = FileController.shared
+
+
+        for path in paths {
+            for info in infos {
+                manager.replaceTextFile(dir: path^.rawValue, file: path.fileName, oldValue: info.name, newValue: info.newName)
+            }
+        }
+
+        for info in infos {
+
+            manager.changeTextFileName(dir: info.dir, fileName: info.fileName, newName: info.newFileName)
+        }
+
+        fixXocdeConfig(infos: infos, rootDir: dirPath)
+    }
+
+
+    private func fixXocdeConfig(infos: [FileInfo], rootDir: Path) {
+
+        let configPaths = rootDir.find { (path) -> Bool in
+            path.pathExtension == "pbxproj" && path.name == "project"
+        }
+
+        guard !configPaths.isEmpty else {
+            return
+        }
+        let configPath = configPaths[0]
+        print(configPath)
+
+
+        for info in infos {
+
+            FileController.shared.replaceTextFile(dir: configPath^.rawValue, file: configPath.fileName, oldValue: info.name, newValue: info.newName)
+
+        }
+
+        resultNoti?(true)
+
+    }
 
 }
 
@@ -222,6 +288,8 @@ extension FileController {
     }
 
     func fileKitErrorHandler(error: FileKitError, path: String? = nil) {
+
+        resultNoti?(false)
 
         switch error {
         case .fileDoesNotExist(path: let path):

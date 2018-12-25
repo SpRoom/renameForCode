@@ -832,6 +832,17 @@
                                     <action selector="startChange:" target="XfG-lQ-9wD" id="xLt-T1-JHx"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="srT-ZH-x3G">
+                                <rect key="frame" x="98" y="244" width="362" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="fby-ty-kTY"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="Zup-PZ-4G4">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="134" id="3SK-QK-jaq"/>
@@ -844,11 +855,14 @@
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="width" secondItem="Evz-pu-GuW" secondAttribute="width" id="Wss-2e-rSE"/>
                             <constraint firstItem="Yk8-Ix-vVJ" firstAttribute="width" secondItem="fTR-Xr-OnM" secondAttribute="width" id="ZYQ-dw-IOq"/>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="leading" secondItem="87K-oN-6nN" secondAttribute="leading" id="bPy-aQ-7f4"/>
+                            <constraint firstItem="srT-ZH-x3G" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="100" id="d9o-oK-40Q"/>
                             <constraint firstItem="Yk8-Ix-vVJ" firstAttribute="leading" secondItem="NVD-8G-8He" secondAttribute="leading" id="haH-87-zjB"/>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="top" secondItem="Evz-pu-GuW" secondAttribute="bottom" constant="15" id="huB-fh-0TY"/>
                             <constraint firstAttribute="trailing" secondItem="nNu-1o-338" secondAttribute="trailing" constant="30" id="hvD-SO-E8L"/>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="leading" secondItem="fTR-Xr-OnM" secondAttribute="leading" id="igu-dw-BNI"/>
                             <constraint firstItem="fTR-Xr-OnM" firstAttribute="trailing" secondItem="zw7-Rq-fem" secondAttribute="trailing" id="jHg-3D-2op"/>
+                            <constraint firstItem="srT-ZH-x3G" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="5" id="kNo-iw-ugH"/>
+                            <constraint firstAttribute="trailing" secondItem="srT-ZH-x3G" secondAttribute="trailing" constant="22" id="l2T-Mp-Vpd"/>
                             <constraint firstItem="fTR-Xr-OnM" firstAttribute="top" secondItem="zw7-Rq-fem" secondAttribute="bottom" constant="1" id="lCm-Q9-Fgz"/>
                             <constraint firstItem="Ra8-8s-mBy" firstAttribute="leading" secondItem="Yk8-Ix-vVJ" secondAttribute="trailing" constant="32" id="vzl-06-UoJ"/>
                             <constraint firstItem="87K-oN-6nN" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="xUg-Q4-QDT"/>
@@ -860,6 +874,8 @@
                         <outlet property="modifyPrefixField" destination="Evz-pu-GuW" id="a7Z-D9-z98"/>
                         <outlet property="newPrefixField" destination="fTR-Xr-OnM" id="DZN-Yj-6zm"/>
                         <outlet property="projectPathField" destination="NVD-8G-8He" id="UX8-a0-eXB"/>
+                        <outlet property="startButton" destination="nNu-1o-338" id="XhL-sD-5gE"/>
+                        <outlet property="statusLabel" destination="srT-ZH-x3G" id="WJJ-Fg-00J"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
