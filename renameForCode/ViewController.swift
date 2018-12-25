@@ -62,6 +62,7 @@ class ViewController: NSViewController {
 //        manager.replaceTextFile(dir: dirPath, file: fileName1, oldValue: "replace", newValue: "")
 */
 
+    
         startButton.isEnabled = false
         self.showErrorStatus("正在进行中...")
 
@@ -88,6 +89,10 @@ class ViewController: NSViewController {
         }
 
         manager.resultNoti = {result in
+            runOnUiThread {
+                self.startButton.isEnabled = true
+            }
+            
             if result {
                 self.showSuccessStatus("更新完成")
             } else {
@@ -117,9 +122,10 @@ extension ViewController {
      */
     func showErrorStatus(_ errorMessage: String)
     {
-
-        statusLabel.textColor = NSColor.red
-        statusLabel.stringValue = errorMessage
+        runOnUiThread {
+            self.statusLabel.textColor = NSColor.red
+            self.statusLabel.stringValue = errorMessage
+        }
     }
 
     /**
@@ -127,9 +133,10 @@ extension ViewController {
      */
     func showSuccessStatus(_ successMessage: String)
     {
-
-        statusLabel.textColor = NSColor.green
-        statusLabel.stringValue = successMessage
+        runOnUiThread {
+        self.statusLabel.textColor = NSColor.green
+        self.statusLabel.stringValue = successMessage
+        }
     }
 }
 

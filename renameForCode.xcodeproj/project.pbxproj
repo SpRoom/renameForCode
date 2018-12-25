@@ -16,6 +16,7 @@
 		5649DFEF21D0ED3A00D7DFCB /* renameForCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649DFEE21D0ED3A00D7DFCB /* renameForCodeTests.swift */; };
 		5649DFFA21D0ED3A00D7DFCB /* renameForCodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649DFF921D0ED3A00D7DFCB /* renameForCodeUITests.swift */; };
 		5649E00921D1C77B00D7DFCB /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5649E00821D1C77B00D7DFCB /* FileController.swift */; };
+		7658884F21D28109000CFE6E /* ShareUtilityMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7658884E21D28109000CFE6E /* ShareUtilityMethods.swift */; };
 		B4A098BDB7B57D792811BC32 /* Pods_renameForCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D7AF13D110FC9C47E0800B /* Pods_renameForCode.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		5649DFF921D0ED3A00D7DFCB /* renameForCodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = renameForCodeUITests.swift; sourceTree = "<group>"; };
 		5649DFFB21D0ED3A00D7DFCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5649E00821D1C77B00D7DFCB /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
+		7658884E21D28109000CFE6E /* ShareUtilityMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareUtilityMethods.swift; sourceTree = "<group>"; };
 		96D7AF13D110FC9C47E0800B /* Pods_renameForCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_renameForCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9C8F6B26109309CE49AD30 /* Pods-renameForCode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-renameForCode.debug.xcconfig"; path = "Target Support Files/Pods-renameForCode/Pods-renameForCode.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +155,7 @@
 				5649E00821D1C77B00D7DFCB /* FileController.swift */,
 				5604AA4221D21A4100B5D2A0 /* FileExtension.swift */,
 				5604AA4421D21BBA00B5D2A0 /* FileInfo.swift */,
+				7658884E21D28109000CFE6E /* ShareUtilityMethods.swift */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5649E00921D1C77B00D7DFCB /* FileController.swift in Sources */,
+				7658884F21D28109000CFE6E /* ShareUtilityMethods.swift in Sources */,
 				5649DFDE21D0ED3800D7DFCB /* ViewController.swift in Sources */,
 				5649DFDC21D0ED3800D7DFCB /* AppDelegate.swift in Sources */,
 				5604AA4321D21A4100B5D2A0 /* FileExtension.swift in Sources */,

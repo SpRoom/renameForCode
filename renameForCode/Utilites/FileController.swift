@@ -26,6 +26,7 @@ final class FileController {
 // public static function
 extension FileController {
 
+    /// 修改文件名 以及 类名； 不包括文件夹名
     func start(projectPathStr: String, prefixStr: String, newPrefixStr: String, pathExtensionsStr: String) {
 
         let pathExtensions = pathExtensionsStr.components(separatedBy: ",")
@@ -34,13 +35,15 @@ extension FileController {
         let paths = dirPath.find { (path) -> Bool in
             pathExtensions.contains(path.pathExtension)
         }
-
-        for path in paths {
-            print(path)
-            let str = path.fileName.replacingOccurrences(of: prefixStr, with: newPrefixStr)
-            print(str)
-
+        
+        guard !paths.isEmpty else {
+            resultNoti?(true)
+            return
         }
+        
+        runOnBackground {
+            
+        
 
         let infos = paths.map { (path)  -> FileInfo in
             let newName = path.replaceFileNamePrefix(of: prefixStr, with: newPrefixStr, containExtension: false)
@@ -52,9 +55,10 @@ extension FileController {
 
 
         for path in paths {
-            for info in infos {
-                manager.replaceTextFile(dir: path^.rawValue, file: path.fileName, oldValue: info.name, newValue: info.newName)
-            }
+//            for info in infos {
+//                manager.replaceTextFile(dir: path^.rawValue, file: path.fileName, oldValue: info.name, newValue: info.newName)
+//            }
+            manager.replaceTextFile(dir: path^.rawValue, file: path.fileName, infos: infos)
         }
 
         for info in infos {
@@ -62,7 +66,9 @@ extension FileController {
             manager.changeTextFileName(dir: info.dir, fileName: info.fileName, newName: info.newFileName)
         }
 
-        fixXocdeConfig(infos: infos, rootDir: dirPath)
+            self.fixXocdeConfig(infos: infos, rootDir: dirPath)
+            
+        }
     }
 
 
@@ -92,6 +98,44 @@ extension FileController {
 }
 
 extension FileController {
+    
+    func replaceTextFile(dir: String, file name: String, infos: [FileInfo]) {
+        
+        let dirPath = Path(dir)
+        let filePath = dirPath + name
+        
+        guard filePath.exists else {
+            resultNoti?(true)
+            return
+        }
+        
+        if filePath.isReadable && filePath.isWritable {
+            
+            do {
+                
+                let file = TextFile(path: filePath, encoding: .utf8)
+                let content = try file.read()
+                var new = content
+                
+                for info in infos {
+                let splitArray = content.components(separatedBy: info.name)
+                 new = splitArray.joined(separator: info.newName)
+                }
+                print(content)
+                print(new)
+                
+                try file.write(new, atomically: true)
+                
+            } catch let e as FileKitError {
+                fileKitErrorHandler(error: e)
+            } catch let err {
+                print(err)
+            }
+            
+        } else {
+            print("this file is can not read or write")
+        }
+    }
 
     /// 替换文本 区分大小写 
     func replaceTextFile(dir: String, file name: String, oldValue: String, newValue: String) {
