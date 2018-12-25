@@ -1,0 +1,16 @@
+PODS:
+  - FileKit (5.2.0)
+
+DEPENDENCIES:
+  - FileKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FileKit
+
+SPEC CHECKSUMS:
+  FileKit: 10bfd8a3023a0b09f24c9f49546cbbddf43fd464
+
+PODFILE CHECKSUM: f0122a5887e83c3d9132f68c710f467dd032c241
+
+COCOAPODS: 1.6.0.beta.2
