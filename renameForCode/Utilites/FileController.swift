@@ -118,8 +118,10 @@ extension FileController {
                 var new = content
                 
                 for info in infos {
-                let splitArray = content.components(separatedBy: info.name)
-                 new = splitArray.joined(separator: info.newName)
+//                let splitArray = content.components(separatedBy: info.name)
+//                 new = splitArray.joined(separator: info.newName)
+                    
+                 new = new.replacingOccurrences(of: info.name, with: info.newName)
                 }
                 print(content)
                 print(new)

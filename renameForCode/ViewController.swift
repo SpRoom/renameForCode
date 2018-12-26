@@ -16,10 +16,10 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
 
-        projectPathField.stringValue = "/Users/zyt/Desktop/123/412/test/AHSample1.swift"
-        modifyPrefixField.stringValue = "AH"
-        newPrefixField.stringValue = "LB"
-        extensionArrayField.stringValue = "txt"
+        projectPathField.stringValue = "/Users/apple/Desktop/anhao/anhao.xcodeproj"
+        modifyPrefixField.stringValue = "AH_USER_BJ_"
+        newPrefixField.stringValue = "LB_"
+        extensionArrayField.stringValue = "h,m"
     }
 
     override var representedObject: Any? {
@@ -38,10 +38,14 @@ class ViewController: NSViewController {
     @IBOutlet weak var extensionArrayField: NSTextField!
 
     @IBOutlet weak var newPrefixField: NSTextField!
-
+    @IBOutlet weak var TimeLabel: NSTextField!
+    
+    
+    var time: TimeInterval = 0
 
     @IBAction func startChange(_ sender: Any) {
 
+        time = Date().timeIntervalSince1970
         let manager = FileController.shared
 /*
         let desktop = "/Users/zyt/Desktop/"
@@ -62,9 +66,12 @@ class ViewController: NSViewController {
 //        manager.replaceTextFile(dir: dirPath, file: fileName1, oldValue: "replace", newValue: "")
 */
 
-    
-        startButton.isEnabled = false
-        self.showErrorStatus("正在进行中...")
+        runOnUiThread {
+            self.startButton.isEnabled = false
+            self.showErrorStatus("正在进行中...")
+            self.showTime("正在进行中...")
+        }
+        
 
         let projectPathStr = projectPathField.stringValue
         let prefixStr = modifyPrefixField.stringValue
@@ -89,15 +96,23 @@ class ViewController: NSViewController {
         }
 
         manager.resultNoti = {result in
+            
+            let endtime = Date().timeIntervalSince1970
+            let costtime = endtime - self.time
+            
             runOnUiThread {
                 self.startButton.isEnabled = true
-            }
+            
+            
             
             if result {
                 self.showSuccessStatus("更新完成")
             } else {
                 self.showErrorStatus("更新失败")
             }
+            self.showTime("总花费时间为 \(costtime) ")
+            
+        }
         }
 
         manager.start(projectPathStr: projectPathStr, prefixStr: prefixStr, newPrefixStr: newPrefixStr, pathExtensionsStr: pathExtensionsStr)
@@ -136,6 +151,14 @@ extension ViewController {
         runOnUiThread {
         self.statusLabel.textColor = NSColor.green
         self.statusLabel.stringValue = successMessage
+        }
+    }
+    
+    func showTime(_ time: String) {
+        
+        runOnUiThread {
+            self.TimeLabel.textColor = NSColor.black
+            self.TimeLabel.stringValue = time
         }
     }
 }
