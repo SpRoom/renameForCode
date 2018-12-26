@@ -843,14 +843,28 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YMR-mV-Wmd">
+                                <rect key="frame" x="148" y="244" width="314" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="EYO-ph-nRH"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="0MW-AE-BhF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="134" id="3SK-QK-jaq"/>
+                            <constraint firstItem="YMR-mV-Wmd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="150" id="3hD-bY-rot"/>
                             <constraint firstItem="Ra8-8s-mBy" firstAttribute="height" secondItem="Yk8-Ix-vVJ" secondAttribute="height" id="4zk-he-Amg"/>
                             <constraint firstAttribute="trailing" secondItem="87K-oN-6nN" secondAttribute="trailing" constant="150" id="6Bs-zT-Dnf"/>
                             <constraint firstAttribute="trailing" secondItem="Ra8-8s-mBy" secondAttribute="trailing" constant="60" id="8x2-V4-IbW"/>
                             <constraint firstItem="nNu-1o-338" firstAttribute="centerY" secondItem="87K-oN-6nN" secondAttribute="centerY" id="9g5-tP-6bj"/>
+                            <constraint firstAttribute="trailing" secondItem="YMR-mV-Wmd" secondAttribute="trailing" constant="20" id="Eom-HA-vOY"/>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="leading" secondItem="Evz-pu-GuW" secondAttribute="leading" id="KXw-9B-45t"/>
+                            <constraint firstItem="YMR-mV-Wmd" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="5" id="N7u-EA-ZLl"/>
                             <constraint firstItem="87K-oN-6nN" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="VRJ-zN-KmJ"/>
                             <constraint firstItem="zw7-Rq-fem" firstAttribute="width" secondItem="Evz-pu-GuW" secondAttribute="width" id="Wss-2e-rSE"/>
                             <constraint firstItem="Yk8-Ix-vVJ" firstAttribute="width" secondItem="fTR-Xr-OnM" secondAttribute="width" id="ZYQ-dw-IOq"/>
@@ -876,7 +890,7 @@
                         <outlet property="newPrefixField" destination="fTR-Xr-OnM" id="DZN-Yj-6zm"/>
                         <outlet property="projectPathField" destination="NVD-8G-8He" id="UX8-a0-eXB"/>
                         <outlet property="startButton" destination="nNu-1o-338" id="XhL-sD-5gE"/>
-                        <outlet property="statusLabel" destination="srT-ZH-x3G" id="WJJ-Fg-00J"/>
+                        <outlet property="statusLabel" destination="YMR-mV-Wmd" id="o4H-5E-Xji"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
