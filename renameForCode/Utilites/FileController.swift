@@ -82,7 +82,7 @@ extension FileController {
             return
         }
         let configPath = configPaths[0]
-        print(configPath)
+//        print(configPath)
 
 
         for info in infos {
@@ -123,8 +123,8 @@ extension FileController {
                     
                  new = new.replacingOccurrences(of: info.name, with: info.newName)
                 }
-                print(content)
-                print(new)
+//                print(content)
+//                print(new)
                 
                 try file.write(new, atomically: true)
                 
@@ -159,8 +159,8 @@ extension FileController {
                let splitArray = content.components(separatedBy: oldValue)
             let new = splitArray.joined(separator: newValue)
 
-                print(content)
-                print(new)
+//                print(content)
+//                print(new)
 
                 try file.write(new, atomically: true)
 
